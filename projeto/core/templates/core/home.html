@@ -1,0 +1,19 @@
+{% extends 'core/base.html' %}
+{% load bootstrap3 %}
+{% load static %}
+
+{% block title %}
+      <a href="https://www.ufn.edu.br" target="_blank"><img src="{% static 'core/img/logoUFN_hor.jpg' %}"
+      class="img-responsive" style="max-width: 120px;"></a>
+{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+      <center>
+            <h2>Sistema de Gestão de Atas</h2>
+            <h3>Ciência da Computação</h3>
+	</center>
+{% endif %}
+
+{% endblock %}
