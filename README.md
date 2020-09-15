@@ -59,7 +59,7 @@ venv\Scripts\activate
 pip install -r requirements.txt
 
 #Iniciando um projeto Django
-django-admin.py startproject projeto
+django-admin.py startproject sistema
 
 #Acessando o diretório projeto
 cd projeto
