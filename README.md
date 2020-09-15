@@ -67,16 +67,14 @@ cd projeto
 #Configurando a linguagem e data/hora do projeto. Edite o arquivo: projeto/settings.py
 LANGUAGE_CODE = 'pt-br'
 
-TIME_ZONE = 'America/Sao_Paulo'
+TIME_ZONE = 'America/Sao_Paulo' 
 
-.....
-
+SUGESTÃO: copie o projeto/settings.py para dentro de seu projeto
 
 #Rodar a migração para criação das tabelas básicas do Django no Banco de dados
 python manage.py migrate
 
-
-#Criação de uma aplicação chamada core
+#Criação de uma aplicação chamada core que controla o fluxo do nosso sistema
 python manage.py startapp core
 
 #Criacao da view responsável pela exibição da home/index na app core
@@ -99,24 +97,22 @@ class AboutView(TemplateView):
 
 {% extends 'core/base.html' %}
 {% load bootstrap3 %}
-{% load staticfiles %}
+{% load static %}
 
 {% block title %}
-	{% bootstrap_icon 'user' %} Home
+      <a href="https://www.ufn.edu.br" target="_blank"><img src="{% static 'core/img/logoUFN_hor.jpg' %}"
+      class="img-responsive" style="max-width: 120px;"></a>
 {% endblock %}
 
 {% block content %}
 
 {% if user.is_authenticated %}
-	<center>
-		<a href= "http://www.universidadefranciscana.edu.br" target="_blank">
-		  <img src="{% static 'core/img/logoUFN_hor.jpg' %}"
-     	 	       class="img-responsive" style="max-width: 340px;">
-     	        </a>
-
-     	 <h2>Sistema de Gestão de TFG - UFN</h2>
+      <center>
+            <h2>Sistema de Gestão de Atas</h2>
+            <h3>Laboratório de Práticas</h3>
 	</center>
 {% endif %}
+
 {% endblock %}
 
 
@@ -126,10 +122,11 @@ class AboutView(TemplateView):
 
 from __future__ import unicode_literals
 from django.conf.urls import url
-from .views import HomeView, AboutView
+from .views import HomeView, AboutView, HomeRedirectView
 
 urlpatterns = [
-   url(r'^$', HomeView.as_view(), name='home'),
+   url(r'^$', HomeRedirectView.as_view(), name='home_redirect'),
+   url(r'^home$', HomeView.as_view(), name='home'),
    url(r'^about$', AboutView.as_view(), name='about'),
 ]
 
@@ -141,7 +138,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'bootstrap4',
+    'bootstrap3',
     'core',
 ]
 
@@ -168,6 +165,11 @@ urlpatterns += static(settings.STATIC_URL,
     document_root = settings.STATIC_ROOT)    
 
 
+#sempre de criar um app, rodar makemigrations (gera os scripts para o banco de dados) e migrate (roda o script)
+python manage.py makemigrations core
+
+python manage.py migrate core
+
 #neste ponto a sua home já pode ser exibida no navegador
 
 #rodando o servidor web de desenvolvimento (dentro do diretório projeto)
@@ -176,7 +178,6 @@ python manage.py runserver
 #acessando via navegador
 http://localhost:8000
 ```
-
 
 ## Criando modelo para persistir no Banco de Dados, Instalando a app no Django Admin (Painel), Buscando os registros do modelo numa view e mostrando no HTML
 ```shell
