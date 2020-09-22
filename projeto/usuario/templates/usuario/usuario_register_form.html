@@ -1,0 +1,27 @@
+{% extends "usuario/usuario_register_base.html" %}
+{% load bootstrap3 %}
+
+{% block actions %} 
+{% endblock %}
+
+{% block title %}
+	{% bootstrap_icon 'user' %} Cadastro de usuário
+{% endblock %}
+
+{% block content %}
+<form class="form" role="form" method="POST">
+  {% csrf_token %}
+  {{ form.non_field_errors }}
+  {% bootstrap_field form.nome %}
+  {% bootstrap_field form.email %}
+  {% bootstrap_field form.password %}
+  {% bootstrap_field form.tipo %}
+  {% bootstrap_field form.matricula %}
+  {% bootstrap_field form.cpf %}
+  {% bootstrap_field form.rg %}
+  
+  {% buttons submit='Gravar' %}
+    <a href="{% url 'home_redirect' %}"class="btn btn-info" role="button">Voltar</a>
+  {% endbuttons %}
+</form>
+{% endblock %}
