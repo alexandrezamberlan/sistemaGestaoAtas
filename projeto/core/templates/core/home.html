@@ -3,8 +3,8 @@
 {% load static %}
 
 {% block title %}
-      <a href="https://www.ufn.edu.br" target="_blank"><img src="{% static 'core/img/logoUFN_hor.jpg' %}"
-      class="img-responsive" style="max-width: 120px;"></a>
+      <img src="{% static 'core/img/logoUFN_hor.jpg' %}"
+      class="img-responsive" style="max-width: 120px;">
 {% endblock %}
 
 {% block content %}
@@ -12,7 +12,9 @@
 {% if user.is_authenticated %}
       <center>
             <h2>Sistema de Gestão de Atas</h2>
-            <h3>Laboratório de Práticas</h3>
+            <h3>Laboratório de Práticas<br>
+                Disciplina Tópicos Avançados em Informática I
+            </h3>
 	</center>
 {% endif %}
 

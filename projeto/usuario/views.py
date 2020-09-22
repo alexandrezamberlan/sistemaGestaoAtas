@@ -4,15 +4,15 @@ from django.contrib.auth import login
 from django.shortcuts import redirect
 from django.urls import reverse
 
-from django.views.generic import ListView,TemplateView, DetailView, RedirectView
+from django.views.generic import ListView, TemplateView, DetailView, RedirectView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from mail_templated import EmailMessage
 
-from utils.decorators import LoginRequiredMixin, StaffRequiredMixin, CoordenadorRequiredMixin
+from utils.decorators import LoginRequiredMixin, StaffRequiredMixin
 
 from .models import Usuario
-from .forms import UsuarioRegisterForm
+# from .forms import UsuarioRegisterForm
 
 
 class UsuarioListView(LoginRequiredMixin, StaffRequiredMixin, ListView):
@@ -21,7 +21,7 @@ class UsuarioListView(LoginRequiredMixin, StaffRequiredMixin, ListView):
 
 class UsuarioCreateView(LoginRequiredMixin, StaffRequiredMixin, CreateView):
     model = Usuario
-    fields = ['tipo', 'nome', 'email', 'cpf','rg' ,'matricula', 'password', 'is_active']
+    fields = ['tipo', 'nome', 'email', 'matricula', 'password', 'is_active']
     success_url = 'usuario_list'
     
     def get_success_url(self):
@@ -31,8 +31,7 @@ class UsuarioCreateView(LoginRequiredMixin, StaffRequiredMixin, CreateView):
 
 class UsuarioUpdateView(LoginRequiredMixin, StaffRequiredMixin, UpdateView):
     model = Usuario
-    fields = ['tipo', 'nome', 'email', 'cpf','rg' ,'matricula', 'is_active']
-    template_name = 'usuario/usuario_form_update.html'
+    fields = ['tipo', 'nome', 'email', 'matricula', 'is_active']
     success_url = 'usuario_list'
     
     def get_success_url(self):
@@ -58,21 +57,21 @@ class UsuarioDeleteView(LoginRequiredMixin, StaffRequiredMixin, DeleteView):
         return redirect(self.success_url)
 
 
-class UsuarioRegisterView(CreateView):
-    model = Usuario
-    form_class = UsuarioRegisterForm
-    template_name = 'usuario/usuario_register_form.html'
+# class UsuarioRegisterView(CreateView):
+#     model = Usuario
+#     form_class = UsuarioRegisterForm
+#     template_name = 'usuario/usuario_register_form.html'
 
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.save()
-        return super(UsuarioRegisterView, self).form_valid(form)
+#     def form_valid(self, form):
+#         self.object = form.save(commit=False)
+#         self.object.save()
+#         return super(UsuarioRegisterView, self).form_valid(form)
     
-    def get_success_url(self):
-        message = EmailMessage('usuario/email/validacao_email.html', {'usuario': self.object},
-                               settings.EMAIL_HOST_USER, to=[self.object.email])
-        message.send()     
-        return reverse('usuario_register_success')
+#     def get_success_url(self):
+#         message = EmailMessage('usuario/email/validacao_email.html', {'usuario': self.object},
+#                                settings.EMAIL_HOST_USER, to=[self.object.email])
+#         message.send()     
+#         return reverse('usuario_register_success')
 
 
 class UsuarioRegisterSuccessView(TemplateView):

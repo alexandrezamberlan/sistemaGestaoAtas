@@ -9,7 +9,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="{% url 'home' %}">TFG Online</a>
+      <a class="navbar-brand" href="{% url 'home' %}">SOGA</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -21,45 +21,19 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% bootstrap_icon 'cog' %} Gestão básica <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="{% url 'usuario_list' %}">Usuários</a></li>
-            <li><a href="{% url 'curso_list' %}">Cursos</a></li>
-            <li><a href="{% url 'disciplina_list' %}">Disciplinas</a></li>
-            <li><a href="{% url 'turma_list' %}">Turmas</a></li>
+            <li><a href="">Cursos</a></li>
+            
           </ul>
         </li>
         
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% bootstrap_icon 'list-alt' %} Submissões de TFG <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% bootstrap_icon 'list-alt' %} Atas <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="">Listar</a></li>
-            <li><a href="#">Acompanhar</a></li>
+            <li><a href="">Gerar</a></li>
+            <li><a href="#">Listar</a></li>
           </ul>
         </li> 
 
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% bootstrap_icon 'check' %} Avaliações de TFG <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-             <li><a href="">Listar avaliações delegadas</a></li>
-          </ul>
-        </li> 
-
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% bootstrap_icon 'briefcase' %} Orientações de TFG <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-             <li><a href="">Listar orientações</a></li>
-          </ul>
-        </li> 
-        
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% bootstrap_icon 'certificate' %} Coordenação TFG <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="">Gerar bancas</a></li>
-            <li><a href="">Gerar horários</a></li>
-            <li><a href="">Gerar pareceres</a></li>
-            <li><a href="#">Relatórios por filtros gerais</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Impressões</a></li>
-          </ul>
-        </li>
         
         <!-- <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>

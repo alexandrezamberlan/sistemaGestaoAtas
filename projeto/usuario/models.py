@@ -20,19 +20,6 @@ class ProfessorAtivoManager(UserManager):
     def get_queryset(self):
         return super().get_queryset().filter(tipo='PROFESSOR', is_active=True) 
     
-class OrientadorAtivoManager(UserManager):
-    def get_queryset(self):
-        return super().get_queryset().filter(tipo='PROFESSOR' or 'COORDENADOR', is_active=True) 
-    
-
-class AlunoAtivoManager(UserManager):
-    def get_queryset(self):
-        return super().get_queryset().filter(tipo='ALUNO', is_active=True)
-    
-class CoordenadorAtivoManager(UserManager):
-    def get_queryset(self):
-        return super().get_queryset().filter(tipo='COORDENADOR', is_active=True)
-
 class SecretariaAtivoManager(UserManager):
     def get_queryset(self):
         return super().get_queryset().filter(tipo='SECRETARIA', is_active=True)
@@ -43,37 +30,28 @@ class Usuario(AbstractBaseUser):
     #2 campo da tupla eh mostrado para o usuario
     TIPOS_USUARIOS = (
         ('ADMINISTRADOR', 'Administrador'),
-        ('COORDENADOR', 'Coordenador'),
         ('PROFESSOR', 'Professor' ),
-        ('ALUNO', 'Aluno'),
         ('SECRETÁRIA', 'Secretária' ),
     )
 
     USERNAME_FIELD = 'email'
 
-    tipo = models.CharField(_('Tipo do usuário *'), max_length=15, choices=TIPOS_USUARIOS, default='ALUNO', help_text='* Campos obrigatórios')
+    tipo = models.CharField(_('Tipo do usuário *'), max_length=15, choices=TIPOS_USUARIOS, default='PROFESSOR', help_text='* Campos obrigatórios')
     nome = models.CharField(_('Nome completo *'), max_length=100)
     email = models.EmailField(_('Email'), unique=True, max_length=100, db_index=True)
-    cpf = models.CharField(_('CPF *'),max_length=14,help_text='ATENÇÃO: Somente os NÚMEROS')
-    rg = models.CharField(_('RG *'),max_length=10,help_text='ATENÇÃO: Somente os NÚMEROS')
     matricula = models.CharField(_('Matrícula'),max_length=10, help_text="ATENÇÃO: Consulte o <a href='http://www.ufn.edu.br/agenda' target= '_blank'>AGENDA</a> para descobrir")    
-    # instituicao = models.ForeignKey('instituicao.Instituicao', verbose_name="Instituição", null=True, blank=True, on_delete=models.PROTECT)
     is_active = models.BooleanField(_('Ativo'), default=False, help_text='Se ativo, o usuário tem permissão para acessar o sistema')
     slug = models.SlugField('Hash',max_length= 200,null=True,blank=True)
 
-    
     objects = UserManager()
     administradores = AdministradorAtivoManager()
-    coordenadores = CoordenadorAtivoManager()
     professores = ProfessorAtivoManager()
-    orientadores = OrientadorAtivoManager()
-    alunos = AlunoAtivoManager()
     secretarias = SecretariaAtivoManager()
 
     class Meta:
-        ordering            =   [u'nome', 'matricula']
-        verbose_name        =   _(u'usuário')
-        verbose_name_plural =   _(u'usuários')
+        ordering            =   ['matricula', 'nome']
+        verbose_name        =   ('usuário')
+        verbose_name_plural =   ('usuários')
 
     def __str__(self):
         return '%s - %s' % (self.matricula, self.nome)

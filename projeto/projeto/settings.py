@@ -29,6 +29,7 @@ DEBUG = config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = ['localhost']
 
+AUTH_USER_MODEL = 'usuario.Usuario'
 
 # Application definition
 
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap3',
     'core',
+    'usuario',
 ]
 
 MIDDLEWARE = [
