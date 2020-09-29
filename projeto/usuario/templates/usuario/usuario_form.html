@@ -11,7 +11,11 @@
 {% block content %}
 <form class="form" role="form" method="POST">
   {% csrf_token %}
-  {{ form.non_field_errors }}
+  <!-- {{ form.non_field_errors }} -->
+
+  {% for error in form.non_field_errors %}
+      {% bootstrap_alert error 'danger' %}
+    {% endfor %}
   
   {% bootstrap_form form %}
   
