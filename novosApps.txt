@@ -1,0 +1,5 @@
+Fazer o app curso
+codigo
+nome
+área
+coordenador -> chave estrangeira para usuario
