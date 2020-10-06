@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, UserManager
 from django.db import models
+from django.db.models import Q
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
@@ -18,7 +19,7 @@ class AdministradorAtivoManager(UserManager):
 
 class ProfessorAtivoManager(UserManager):
     def get_queryset(self):
-        return super().get_queryset().filter(tipo='PROFESSOR', is_active=True) 
+        return super().get_queryset().filter(Q(tipo='PROFESSOR') | Q(tipo='ADMINISTRADOR'), is_active=True)
     
 class SecretariaAtivoManager(UserManager):
     def get_queryset(self):

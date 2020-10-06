@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     
     'atas',
     'core',
+    'curso',
     'usuario',
 ]
 
