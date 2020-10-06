@@ -16,7 +16,8 @@
   			<th>Nome</th>
   			<th>Tipo</th>
   			<th>E-mail</th>
-  			<th>Matrícula</th>
+			<th>Matrícula</th>
+			<th>Curso</th>
   			<th>Ativo</th>
   			<th>Último acesso</th>
   			<th class="text-center">Editar</th>
@@ -29,6 +30,15 @@
 					<td>{{ usuario.tipo }}</td>
 					<td>{{ usuario.email }}</td>
 					<td>{{ usuario.matricula }}</td>
+					
+					<td>
+						{% if usuario.curso %}
+							{{ usuario.curso }}
+						{% else %}
+							Nenhum curso associado
+						{% endif %}
+					</td>
+					
 					<td>
 						{% if usuario.is_active %}
 							{% bootstrap_icon 'ok' size='sm' %}
