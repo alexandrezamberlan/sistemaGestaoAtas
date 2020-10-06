@@ -28,7 +28,7 @@ class Ata(models.Model):
         unique_together     =   ['codigo', 'data', 'hora'] #criando chave primária composta no BD
 
     def __str__(self):
-        return "%s: %s. Curso: %s" % (self.codigo, self.data, self.hora)
+        return "Ata: %s. Data: %s." % (self.codigo, self.data)
 
     def save(self, *args, **kwargs):
         if not self.slug:
