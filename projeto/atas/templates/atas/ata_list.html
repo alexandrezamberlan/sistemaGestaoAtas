@@ -18,6 +18,7 @@
 			<th>Hora</th>
 			<th>Local</th>
 			<th>Pauta</th>
+			<th>Arquivo Anexo</th>
   			<th class="text-center">Editar</th>
   			<th class="text-center">Excluir</th>
   		</thead>
@@ -30,6 +31,17 @@
 					<td>{{ ata.hora }}</td>
 					<td>{{ ata.local }}</td>
 					<td>{{ ata.pauta }}</td>
+					<td>
+						{% if ata.arquivo_anexo1 %}
+							<a href="{{ ata.arquivo_anexo1.url }}" target="_blank" class="btn btn-sm btn-success">
+								{% bootstrap_icon 'download' %}
+							</a>
+						{% else %}
+							<a href="" target="_blank" class="btn btn-sm btn-warning disabled">
+								{% bootstrap_icon 'download' %}
+							</a>
+						{% endif %}
+					</td>
 					<td class="text-center">
 				          {% bootstrap_button content='' href=ata.get_absolute_url button_type='link' icon='edit' button_class='btn btn-primary' size='sm' %}
 				    </td>

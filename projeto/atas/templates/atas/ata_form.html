@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block content %}
-<form class="form" role="form" method="POST">
+<form class="form" role="form" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <!-- {{ form.non_field_errors }} -->
     
@@ -19,6 +19,22 @@
     
     <!-- dizendo para o bootstrap utilizar todos os atributos definidos em views.py -->
     {% bootstrap_form form %} 
+    
+
+    {% comment %} 
+      {% bootstrap_field form.codigo %}
+      {% bootstrap_field form.data %}
+      {% bootstrap_field form.hora %}
+      {% bootstrap_field form.local %}
+      {% bootstrap_field form.pauta %}
+      {% bootstrap_field form.redator %}
+      {% bootstrap_field form.texto %}
+      {% bootstrap_field form.validada %}
+      {% bootstrap_field form.integrantes %}
+
+      {% bootstrap_field form.arquivo_anexo1 %}
+    {% endcomment %} 
+
 
     {% buttons submit='Gravar' %}
        <a href="javascript:history.go(-1);" class="btn btn-info" role="button">Voltar</a>

@@ -16,26 +16,47 @@ from .models import Ata
 
 class AtaListView(LoginRequiredMixin,  StaffRequiredMixin, ListView):
     model = Ata
-    fields = ['codigo', 'data', 'hora', 'local', 'pauta', 'redator', 'texto', 'validada', 'integrantes']
-
+    
 
 class AtaCreateView(LoginRequiredMixin,  StaffRequiredMixin, CreateView):
     model = Ata
-    fields = ['codigo', 'data', 'hora', 'local', 'pauta', 'redator', 'texto', 'validada', 'integrantes']
+    fields = ['codigo', 'data', 'hora', 'local', 'pauta', 'redator', 'texto', 'validada', 'integrantes', 'arquivo_anexo1']
     success_url = 'ata_list'
+    
+    def form_valid(self, form):
+        limite_mb = 100 * 1024 * 1024
+        ata = form.instance
+        
+        if (not ata.arquivo_anexo1 or (ata.arquivo_anexo1 and ata.arquivo_anexo1.file.size <= limite_mb)):
+            form.save()
+            return super(AtaCreateView, self).form_valid(form)
+        else:
+            messages.warning(self.request, 'Sistema somente suporta 100 Mb no anexo!')
+            return super(AtaCreateView, self).form_invalid(form)
     
     def get_success_url(self):
         messages.success(self.request, 'Ata cadastrada com sucesso na plataforma!')
         return reverse(self.success_url)
-
+        
 
 class AtaUpdateView(LoginRequiredMixin,  StaffRequiredMixin, UpdateView):
     model = Ata
-    fields = ['local', 'pauta', 'redator', 'texto', 'validada', 'integrantes']
+    fields = ['local', 'pauta', 'redator', 'texto', 'validada', 'integrantes', 'arquivo_anexo1']
     success_url = 'ata_list'
     
+    def form_valid(self, form):
+        limite_mb = 100 * 1024 * 1024
+        ata = form.instance
+        
+        if (not ata.arquivo_anexo1 or (ata.arquivo_anexo1 and ata.arquivo_anexo1.file.size <= limite_mb)):
+            form.save()
+            return super(AtaUpdateView, self).form_valid(form)
+        else:
+            messages.warning(self.request, 'Sistema somente suporta 100 Mb no anexo!')
+            return super(AtaUpdateView, self).form_invalid(form)
+    
     def get_success_url(self):
-        messages.success(self.request, 'Dados da turma atualizados com sucesso na plataforma!')
+        messages.success(self.request, 'Dados da ata atualizados com sucesso na plataforma!')
         return reverse(self.success_url)
 
 
