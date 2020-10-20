@@ -9,17 +9,17 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from mail_templated import EmailMessage
 
-from utils.decorators import LoginRequiredMixin, StaffRequiredMixin
+from utils.decorators import LoginRequiredMixin, StaffRequiredMixin, SecretariaRequiredMixin
 
 from .models import Usuario
 # from .forms import UsuarioRegisterForm
 
 
-class UsuarioListView(LoginRequiredMixin, StaffRequiredMixin, ListView):
+class UsuarioListView(LoginRequiredMixin, ListView):
     model = Usuario
 
 
-class UsuarioCreateView(LoginRequiredMixin, StaffRequiredMixin, CreateView):
+class UsuarioCreateView(LoginRequiredMixin, SecretariaRequiredMixin, CreateView):
     model = Usuario
     fields = ['tipo', 'nome', 'email', 'matricula', 'curso', 'password', 'is_active']
     success_url = 'usuario_list'
@@ -29,7 +29,7 @@ class UsuarioCreateView(LoginRequiredMixin, StaffRequiredMixin, CreateView):
         return reverse(self.success_url)
 
 
-class UsuarioUpdateView(LoginRequiredMixin, StaffRequiredMixin, UpdateView):
+class UsuarioUpdateView(LoginRequiredMixin, SecretariaRequiredMixin, UpdateView):
     model = Usuario
     fields = ['tipo', 'nome', 'email', 'matricula', 'curso', 'is_active']
     success_url = 'usuario_list'

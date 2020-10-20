@@ -9,14 +9,14 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from django.urls import reverse
 
-from utils.decorators import LoginRequiredMixin, StaffRequiredMixin
+from utils.decorators import LoginRequiredMixin, StaffRequiredMixin, SecretariaRequiredMixin
 
 from .forms import CursoForm
 
 from .models import Curso
 
 
-class CursoListView(LoginRequiredMixin, StaffRequiredMixin, ListView):
+class CursoListView(LoginRequiredMixin, SecretariaRequiredMixin, ListView):
     model = Curso
 
 

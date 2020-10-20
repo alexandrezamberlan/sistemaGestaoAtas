@@ -8,11 +8,8 @@ from utils.decorators import LoginRequiredMixin, StaffRequiredMixin
 
 class HomeRedirectView(LoginRequiredMixin, RedirectView):
     def get_redirect_url(self, **kwargs):
-        if self.request.user.tipo == 'ADMINISTRADOR':
-            return reverse('home')
-        elif self.request.user.tipo == 'PROFESSOR':
-            return reverse('home')
-
+        return reverse('home')
+        
 
 class HomeView(LoginRequiredMixin, TemplateView):
 	template_name = 'core/home.html'

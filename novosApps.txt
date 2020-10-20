@@ -1,5 +1,5 @@
 Pendências:
     - (FEITO) em gestão de ata, adicionar atributo para carregar arquivo
-    - permissões de acesso diferencidas aos diferentes usuários
+    - (FEITO) permissões de acesso diferencidas aos diferentes usuários
     - linkar uma ata a um curso
     - criar app de geração de pdfs de atas

@@ -9,16 +9,16 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from django.urls import reverse
 
-from utils.decorators import LoginRequiredMixin,  StaffRequiredMixin
+from utils.decorators import LoginRequiredMixin,  StaffRequiredMixin, SecretariaRequiredMixin
 
 from .models import Ata
 
 
-class AtaListView(LoginRequiredMixin,  StaffRequiredMixin, ListView):
+class AtaListView(LoginRequiredMixin, SecretariaRequiredMixin, ListView):
     model = Ata
     
 
-class AtaCreateView(LoginRequiredMixin,  StaffRequiredMixin, CreateView):
+class AtaCreateView(LoginRequiredMixin,  SecretariaRequiredMixin, CreateView):
     model = Ata
     fields = ['codigo', 'data', 'hora', 'local', 'pauta', 'redator', 'texto', 'validada', 'integrantes', 'arquivo_anexo1']
     success_url = 'ata_list'
@@ -39,7 +39,7 @@ class AtaCreateView(LoginRequiredMixin,  StaffRequiredMixin, CreateView):
         return reverse(self.success_url)
         
 
-class AtaUpdateView(LoginRequiredMixin,  StaffRequiredMixin, UpdateView):
+class AtaUpdateView(LoginRequiredMixin,  SecretariaRequiredMixin, UpdateView):
     model = Ata
     fields = ['local', 'pauta', 'redator', 'texto', 'validada', 'integrantes', 'arquivo_anexo1']
     success_url = 'ata_list'
