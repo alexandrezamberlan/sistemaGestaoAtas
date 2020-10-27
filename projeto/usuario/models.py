@@ -42,7 +42,7 @@ class Usuario(AbstractBaseUser):
     email = models.EmailField(_('Email'), unique=True, max_length=100, db_index=True)
     matricula = models.CharField(_('Matrícula'),max_length=10, help_text="ATENÇÃO: Consulte o <a href='http://www.ufn.edu.br/agenda' target= '_blank'>AGENDA</a> para descobrir")    
     
-    curso = models.ForeignKey('curso.Curso', verbose_name= 'Curso', null=True, blank=True, on_delete=models.PROTECT)
+    curso = models.ManyToManyField('curso.Curso', verbose_name= 'Curso', null=True, blank=True, help_text='Para selecionar ou não um curso, use o mouse e a tecla CTRL')
     
     is_active = models.BooleanField(_('Ativo'), default=False, help_text='Se ativo, o usuário tem permissão para acessar o sistema')
     slug = models.SlugField('Hash',max_length= 200,null=True,blank=True)

@@ -1,7 +1,9 @@
 Pendências:
     - (FEITO) em gestão de ata, adicionar atributo para carregar arquivo
     - (FEITO) permissões de acesso diferencidas aos diferentes usuários
-    - linkar uma ata a um curso
-    - criar app de geração de pdfs de atas
-    - quando um professor de um curso acessar o sistema, ele deverá visualizar somente dados referente ao 
+    - (FEIT0) linkar uma ata a um curso
+    - quando um professor/secretaria de um curso acessar o sistema, ele deverá visualizar somente dados referente ao 
       seu curso
+    - criar app de geração de pdfs de atas        
+    - resetar senha
+    

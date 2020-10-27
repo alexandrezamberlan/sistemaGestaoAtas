@@ -17,7 +17,7 @@
   			<th>Tipo</th>
   			<th>E-mail</th>
 			<th>Matrícula</th>
-			<th>Curso</th>
+			<th>Curso(s)</th>
   			<th>Ativo</th>
   			<th>Último acesso</th>
   			<th class="text-center">Editar</th>
@@ -32,11 +32,16 @@
 					<td>{{ usuario.matricula }}</td>
 					
 					<td>
-						{% if usuario.curso %}
-							{{ usuario.curso }}
-						{% else %}
-							Nenhum curso associado
-						{% endif %}
+						{% for c in usuario.curso.all %}
+							{{ c.nome }}
+							{% if forloop.last %}
+							.
+							{% else %}
+							,
+							{% endif %}
+						{% empty %}
+							<i>Nenhum curso associado</i>
+						{% endfor %}
 					</td>
 					
 					<td>

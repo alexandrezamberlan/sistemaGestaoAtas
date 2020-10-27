@@ -10,6 +10,5 @@ Disciplina:
 
 
     - Pendências na disciplina:
-        - logar e autenticar
         - autocadastro e envio de email
         - resetar senha
