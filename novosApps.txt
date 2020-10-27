@@ -3,3 +3,5 @@ Pendências:
     - (FEITO) permissões de acesso diferencidas aos diferentes usuários
     - linkar uma ata a um curso
     - criar app de geração de pdfs de atas
+    - quando um professor de um curso acessar o sistema, ele deverá visualizar somente dados referente ao 
+      seu curso

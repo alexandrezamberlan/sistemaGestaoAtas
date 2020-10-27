@@ -1,0 +1,15 @@
+Disciplina:
+    - Orientação a objetos: classe, atributos públicos, métodos (sobreescrita)
+    - Python: instruções controle (if e for); objetos lista; iteração sobre lista;
+    - Framework Django: MOR (mapeamento objeto-relacional) - makemigrations e migrate
+    - Refatoração: 
+    - Framework Bootstrap: templates
+    - Fluxo de trabalho: models.py, views.py, urls.py (app) e pasta template; settings.py, urls.py (projeto),
+                         templates do core 
+    - Peculiaridades: filtros (models.py); arquivos (filtros e gestão do arquivo no servidor); permissões
+
+
+    - Pendências na disciplina:
+        - logar e autenticar
+        - autocadastro e envio de email
+        - resetar senha

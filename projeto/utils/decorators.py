@@ -59,18 +59,18 @@ class CoordenadorRequiredMixin(object):
         return super(CoordenadorRequiredMixin, self).dispatch(request,*args, **kwargs)
 
 
-class Professor_BolsistaRequiredMixin(object):
+class ProfessorRequiredMixin(object):
     """
     View mixin which requires that the authenticated user is a staff member
     (i.e. `is_staff` is True).
     """
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
-        if not request.user.tipo == 'BOLSISTA' and not request.user.tipo == 'PROFESSOR':
+        if not request.user.tipo == 'PROFESSOR'  and not request.user.tipo == 'SECRETARIA' and not request.user.tipo == 'ADMINISTRADOR':
             messages.error(
                 request,
                 ' Você não tem permissão para acessar esta área'
                 ' ou realizar esta operação'
             )
             return redirect('appprofessor_home')
-        return super(Professor_BolsistaRequiredMixin, self).dispatch(request,*args, **kwargs)
+        return super(ProfessorRequiredMixin, self).dispatch(request,*args, **kwargs)

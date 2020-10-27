@@ -14,7 +14,7 @@ from utils.decorators import LoginRequiredMixin,  StaffRequiredMixin, Secretaria
 from .models import Ata
 
 
-class AtaListView(LoginRequiredMixin, SecretariaRequiredMixin, ListView):
+class AtaListView(LoginRequiredMixin, ListView):
     model = Ata
     
 
