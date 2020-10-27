@@ -20,7 +20,7 @@ class AtaListView(LoginRequiredMixin, ListView):
 
 class AtaCreateView(LoginRequiredMixin,  SecretariaRequiredMixin, CreateView):
     model = Ata
-    fields = ['codigo', 'data', 'hora', 'local', 'pauta', 'redator', 'texto', 'validada', 'integrantes', 'arquivo_anexo1']
+    fields = ['curso', 'codigo', 'data', 'hora', 'local', 'pauta', 'redator', 'texto', 'validada', 'integrantes', 'arquivo_anexo1']
     success_url = 'ata_list'
     
     def form_valid(self, form):

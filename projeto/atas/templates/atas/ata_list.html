@@ -13,6 +13,7 @@
 	</div>
 	<table class="table table-hover">
   		<thead>
+			<th>Curso</th>
 			<th>Código</th>
 			<th>Data</th>
 			<th>Hora</th>
@@ -26,7 +27,8 @@
   		<tbody>
   			{% for ata in object_list %}
 				<tr>
-					<td>{{ ata.codigo }}</td>
+					<td>{{ ata.curso }} </td>
+					<td>{{ ata.codigo }} </td>
 					<td>{{ ata.data|date:'d/m/Y' }}</td>
 					<td>{{ ata.hora }}</td>
 					<td>{{ ata.local }}</td>

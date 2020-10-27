@@ -21,7 +21,7 @@ class Ata(models.Model):
     texto = models.TextField(_('Texto da reunião'), null=True, blank=True, max_length=10000)
     validada = models.BooleanField(_('Ata validada? '), default=False, null=True, blank=True)
     integrantes = models.ManyToManyField('usuario.Usuario', verbose_name='Integrantes', null=True, blank=True, related_name='integrantes')
-    
+    curso = models.ForeignKey('curso.Curso', verbose_name= 'Curso *', on_delete=models.PROTECT, related_name='curso')
     arquivo_anexo1 = models.FileField(_('Anexo à reunião'), null=True, blank=True, upload_to='midias', help_text='Se houver mais de um arquivo, sugere-se enviar o compactado')
     
     slug = models.SlugField('Hash',max_length= 200, null=True, blank=True)
