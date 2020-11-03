@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.shortcuts import render
 from django.shortcuts import redirect
 
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from django.urls import reverse
@@ -17,7 +17,7 @@ from .models import Ata
 class AtaListView(LoginRequiredMixin, ListView):
     model = Ata
     
-
+    
 class AtaCreateView(LoginRequiredMixin,  SecretariaRequiredMixin, CreateView):
     model = Ata
     fields = ['curso', 'codigo', 'data', 'hora', 'local', 'pauta', 'redator', 'texto', 'validada', 'integrantes', 'arquivo_anexo1']
@@ -76,3 +76,8 @@ class AtaDeleteView(LoginRequiredMixin, StaffRequiredMixin, DeleteView):
         except Exception as e:
             messages.error(request, 'Há dependências ligadas à essa ata, permissão negada!')
         return redirect(self.success_url)
+    
+    
+class AtaDetailView(LoginRequiredMixin, DetailView):
+    model = Ata
+    template_name = 'atas/ata_detail.html'

@@ -51,6 +51,10 @@ class Ata(models.Model):
     def get_delete_url(self):
         return reverse('ata_delete', args=[str(self.id)])
     
+    @property
+    def get_visualiza_url(self):
+        return reverse('ata_detail', args=[str(self.id)])
+    
 
 #triggers para limpeza dos arquivos apagados ou alterados. No Django é chamado de signals
 #deleta o arquivo fisico ao excluir o item da pasta midias
