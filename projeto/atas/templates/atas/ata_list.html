@@ -25,38 +25,40 @@
   		</thead>
 
   		<tbody>
-  			{% for ata in object_list %}
-				<tr>
-					<td>{{ ata.curso }} </td>
-					<td>{{ ata.codigo }} </td>
-					<td>{{ ata.data|date:'d/m/Y' }}</td>
-					<td>{{ ata.hora }}</td>
-					<td>{{ ata.local }}</td>
-					<td>{{ ata.pauta }}</td>
-					<td>
-						<span  data-toggle="tooltip"  title='Arquivo Anexo da Ata'>
-							{% if ata.arquivo_anexo1 %}
-								<a href="{{ ata.arquivo_anexo1.url }}" target="_blank" class="btn btn-sm btn-success">
-									{% bootstrap_icon 'download' %}
-								</a>
-							{% else %}
-								<a href="" target="_blank" class="btn btn-sm btn-warning disabled">
-									{% bootstrap_icon 'download' %}
-								</a>
-							{% endif %}
-						</span>
-					</td>
-					<td class="text-center">
-						<span  data-toggle="tooltip"  title='Editar'>
-						  {% bootstrap_button content='' href=ata.get_absolute_url button_type='link' icon='edit' button_class='btn btn-primary' size='sm' %}
-						</span>
-				    </td>
-				    <td class="text-center">
-						<span  data-toggle="tooltip"  title='Excluir'>
-						  {% bootstrap_button content='' href=ata.get_delete_url button_type='link' icon='trash' button_class='btn btn-danger' size='sm' %}
-						</span>
-				    </td>
-				</tr>
+			{% for ata in object_list %}
+				{% if user.tipo == 'ADMINISTRADOR' or ata.curso in user.curso.all %}  
+					<tr>
+						<td>{{ ata.curso }} </td>
+						<td>{{ ata.codigo }} </td>
+						<td>{{ ata.data|date:'d/m/Y' }}</td>
+						<td>{{ ata.hora }}</td>
+						<td>{{ ata.local }}</td>
+						<td>{{ ata.pauta }}</td>
+						<td>
+							<span  data-toggle="tooltip"  title='Arquivo Anexo da Ata'>
+								{% if ata.arquivo_anexo1 %}
+									<a href="{{ ata.arquivo_anexo1.url }}" target="_blank" class="btn btn-sm btn-success">
+										{% bootstrap_icon 'download' %}
+									</a>
+								{% else %}
+									<a href="" target="_blank" class="btn btn-sm btn-warning disabled">
+										{% bootstrap_icon 'download' %}
+									</a>
+								{% endif %}
+							</span>
+						</td>
+						<td class="text-center">
+							<span  data-toggle="tooltip"  title='Editar'>
+							{% bootstrap_button content='' href=ata.get_absolute_url button_type='link' icon='edit' button_class='btn btn-primary' size='sm' %}
+							</span>
+						</td>
+						<td class="text-center">
+							<span  data-toggle="tooltip"  title='Excluir'>
+							{% bootstrap_button content='' href=ata.get_delete_url button_type='link' icon='trash' button_class='btn btn-danger' size='sm' %}
+							</span>
+						</td>
+					</tr>
+				{% endif %}
 			{% endfor %}
   		</tbody>
 	</table>
