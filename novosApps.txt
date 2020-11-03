@@ -4,15 +4,13 @@ Pendências:
     - (FEIT0) linkar uma ata a um curso
     - (FEITO) container-fluid -> core/templates/base.html
     - (FEITO) tooltip em botões -> core/templates/bootstrap.html e nos <td> dos lists com <span>    
-    
-    - quando um professor/secretaria de um curso acessar o sistema, ele deverá visualizar 
+    - (FEITO) quando um professor/secretaria de um curso acessar o sistema, ele deverá visualizar 
       somente dados referente ao  seu curso
-
-
+    - (FEITO) no app atas, um botão para listar o conteúdo de uma ata (DetailView)
 
     - criar app de geração de pdfs de atas        
     - resetar senha
     - autocadastro e envio de email
     - quando uma ata esta sendo criada, ao mostrar integrantes e redator, mostrar somente aqueles
-      do curso da ata
+      do curso da ata -> AJAX e Javascript
  

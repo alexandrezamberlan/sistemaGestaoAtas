@@ -2,26 +2,83 @@
 {% load bootstrap3 %}
 
 {% block title %}
-	{% bootstrap_icon '' %} Ata: <small><span class="label label-info">{{ object.codigo }}. Data: {{ object.data }}. Data: {{ object.hora }}</span></small>
+
 {% endblock %}
 
 {% block content %}
+	{% include 'atas/includes/_barra_botoes.html' %}
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			Detalhes da ata:
+			Curso: {{ object.curso }}
+		</div>
+		<table class="table table-hover">
+			<tbody>
+				<tr>
+					<td>Data e hora:</td>
+					<td>Número {{ object.codigo }} em {{ object.data|date:'d/m/Y' }} às {{ object.hora }}</td>
+				</tr>
+				<tr>
+					<td>Local:</td>
+					<td>{{ object.local }}</td>
+				</tr>
+				<tr>
+					<td>Pauta:</td>
+					<td>{{ object.pauta }}</td>
+				</tr>
+				<tr>
+					<td>Redator:</td>
+					<td>{{ object.redator }}</td>
+				</tr>
+				<tr>
+					<td>Integrantes:</td>
+					<td>
+						{% for c in object.integrantes.all %}
+							{{ c.nome }}
+							{% if forloop.last %}
+								.
+							{% else %}
+								,
+							{% endif %}
+						{% empty %}
+							<i>Nenhum participante</i>
+						{% endfor %}
+					</td>
+				</tr>
+				<tr>
+					<td>Validada? </td>
+					<td>
+						{% if object.validada %}
+							Sim
+						{% else %}
+							Não
+						{% endif%}
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			Texto e anexo
 		</div>
 		<div class="panel-body">
-		  <ol>
-			  <li>LOCAL: {{ object.local }}</li>
-			  <li>PAUTA: {{ object.local }}</li>
-			  <li>REDATOR: {{ object.local }}</li>
-			  <li>TEXTO: {{ object.local }}</li>
-			  <li>VALIDADA: {{ object.local }}</li>
-			  <li>INTEGRANTES: {{ object.local }}</li>
-			  <li>CURSO: {{ object.local }}</li>
-			  <li>ARQUIVO ANEXO: {{ object.local }}</li>
-		  </ol>
+			{{ object.texto|linebreaks }}
+			<br>
+			Arquivo em Anexo<br>
+			<span  data-toggle="tooltip"  title='Arquivo Anexo da Ata'>
+				{% if ata.arquivo_anexo1 %}
+					<a href="{{ ata.arquivo_anexo1.url }}" target="_blank" class="btn btn-sm btn-success">
+						{% bootstrap_icon 'download' %}
+					</a>
+				{% else %}
+					<a href="" target="_blank" class="btn btn-sm btn-warning disabled">
+						{% bootstrap_icon 'download' %}
+					</a>
+				{% endif %}
+			</span>
 		</div>
-	  </div>
-	
+		
+	</div>
+	{% include 'atas/includes/_barra_botoes.html' %}
 {% endblock %}
