@@ -4,6 +4,9 @@ Pendências:
     - (FEIT0) linkar uma ata a um curso
     - quando um professor/secretaria de um curso acessar o sistema, ele deverá visualizar somente dados referente ao 
       seu curso
+    - quando uma ata esta sendo criada, ao mostrar integrantes e redator, mostrar somente aqueles
+      do curso da ata
+ 
     - criar app de geração de pdfs de atas        
     - resetar senha
     - autocadastro e envio de email
