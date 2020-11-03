@@ -2,12 +2,17 @@ Pendências:
     - (FEITO) em gestão de ata, adicionar atributo para carregar arquivo
     - (FEITO) permissões de acesso diferencidas aos diferentes usuários
     - (FEIT0) linkar uma ata a um curso
-    - quando um professor/secretaria de um curso acessar o sistema, ele deverá visualizar somente dados referente ao 
-      seu curso
-    - quando uma ata esta sendo criada, ao mostrar integrantes e redator, mostrar somente aqueles
-      do curso da ata
- 
+    - (FEITO) container-fluid -> core/templates/base.html
+    - (FEITO) tooltip em botões -> core/templates/bootstrap.html e nos <td> dos lists com <span>    
+    
+    - quando um professor/secretaria de um curso acessar o sistema, ele deverá visualizar 
+      somente dados referente ao  seu curso
+
+
+
     - criar app de geração de pdfs de atas        
     - resetar senha
     - autocadastro e envio de email
-    
+    - quando uma ata esta sendo criada, ao mostrar integrantes e redator, mostrar somente aqueles
+      do curso da ata
+ 
