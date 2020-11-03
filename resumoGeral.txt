@@ -7,8 +7,3 @@ Disciplina:
     - Fluxo de trabalho: models.py, views.py, urls.py (app) e pasta template; settings.py, urls.py (projeto),
                          templates do core 
     - Peculiaridades: filtros (models.py); arquivos (filtros e gestão do arquivo no servidor); permissões
-
-
-    - Pendências na disciplina:
-        - autocadastro e envio de email
-        - resetar senha

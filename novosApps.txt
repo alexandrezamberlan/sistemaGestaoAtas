@@ -6,4 +6,5 @@ Pendências:
       seu curso
     - criar app de geração de pdfs de atas        
     - resetar senha
+    - autocadastro e envio de email
     
