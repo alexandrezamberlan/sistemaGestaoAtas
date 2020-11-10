@@ -264,4 +264,30 @@ python manage.py migrate core
 python manage.py migrate usuario
 python manage.py migrate ....
 
+#Criando o banco de dados e o 1o usuario do banco: com a venv levantada, na pasta projeto, rodar:
+python manage.py shell
+
+##PARA VISUALIZAR, SE NECESSÁRIO, OS USUÁRIOS DO MYSQL
+SELECT user FROM mysql.user;
+
+##criando o banco
+CREATE DATABASE nomeDoSistema_db;
+
+CREATE USER ‘nomeDoSistema’@‘localhost' IDENTIFIED BY ‘senhaDesejada’;
+
+GRANT ALL PRIVILEGES ON nomeDoSistema_db.* TO ‘nomeDoSistema’@‘localhost' IDENTIFIED BY 'senhaDesejada';
+
+##criando o primeiro usuário
+
+from usuario.models import Usuario
+u = Usuario()
+u.nome = 'SADEPI'
+u.tipo = 'ADMINISTRADOR'
+u.email = 'projetos@ufn.edu.br'
+u.is_active = True
+u.cpf = '99999999999'
+u.save()
+u.set_password('projetos@ufn.edu.br')
+u.save()
+
 ```
