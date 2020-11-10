@@ -36,48 +36,48 @@ sudo apt-get install git
 > ***Objetivo:*** Projeto Django rodando localmente, versionado com Git e distribuído na plataforma Github
 
 ```shell
-#Sugere-se, primeiro criar a ideia do projeto do Git (GitHub, Bitbucket ou GitLab). Criar os arquivos .gitignore e README.md
+### Sugere-se, primeiro criar a ideia do projeto do Git (GitHub, Bitbucket ou GitLab). Criar os arquivos .gitignore e README.md
 
-#Clonar o projeto via Git no seu diretório (pasta) escolhido
+### Clonar o projeto via Git no seu diretório (pasta) escolhido
 git clone http://............ 
 
-#Acessar a pasta do projeto clonado
+### Acessar a pasta do projeto clonado
 cd pastaClonada
 
-#Criando uma virtualenv com Python (ambiente isolado) - Ambiente localizado no diretório venv
+### Criando uma virtualenv com Python (ambiente isolado) - Ambiente localizado no diretório venv
 virtualenv -p python3 venv
 
-#Ativando a virtualenv
+### Ativando a virtualenv
 source venv/bin/activate
 
-#Caso esteja no Windows (principalmente o 10), para criar e ativar a venv, use estes passos
+### Caso esteja no Windows (principalmente o 10), para criar e ativar a venv, use estes passos
 python3 -m venv venv 
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
 venv\Scripts\activate 
 
-#Instalando os softwares dentro do arquivo requirements.txt
+### Instalando os softwares dentro do arquivo requirements.txt
 pip install -r requirements.txt
 
-#Iniciando um projeto Django
+### Iniciando um projeto Django
 django-admin.py startproject projeto
 
-#Acessando o diretório projeto
+### Acessando o diretório projeto
 cd projeto
 
-#Configurando a linguagem e data/hora do projeto. Edite o arquivo: projeto/settings.py
+### Configurando a linguagem e data/hora do projeto. Edite o arquivo: projeto/settings.py
 LANGUAGE_CODE = 'pt-br'
 
 TIME_ZONE = 'America/Sao_Paulo' 
 
 SUGESTÃO: copie o projeto/settings.py para dentro de seu projeto
 
-#Rodar a migração para criação das tabelas básicas do Django no Banco de dados
+### Rodar a migração para criação das tabelas básicas do Django no Banco de dados
 python manage.py migrate
 
-#Criação de uma aplicação chamada core que controla o fluxo do nosso sistema
+### Criação de uma aplicação chamada core que controla o fluxo do nosso sistema
 python manage.py startapp core
 
-#Criacao da view responsável pela exibição da home/index na app core
+### Criacao da view responsável pela exibição da home/index na app core
 #edite o arquivo core/views.py e certifique-se que contenha:
 
 from __future__ import unicode_literals
@@ -93,7 +93,7 @@ class AboutView(TemplateView):
 	template_name = 'core/about.html'
 
 
-#crie o home.html em core/templates/core/home.html (será preciso criar os diretórios)
+### crie o home.html em core/templates/core/home.html (será preciso criar os diretórios)
 
 {% extends 'core/base.html' %}
 {% load bootstrap3 %}
@@ -116,9 +116,9 @@ class AboutView(TemplateView):
 {% endblock %}
 
 
-#crie o arquivo urls.py em: core/urls.py - Ele é responsável pela identificação da view responsável para cada URL pertencente a app core
+### crie o arquivo urls.py em: core/urls.py - Ele é responsável pela identificação da view responsável para cada URL pertencente a app core
 
-#edite o arquivo core/urls.py com o seguinte conteúdo:
+### edite o arquivo core/urls.py com o seguinte conteúdo:
 
 from __future__ import unicode_literals
 from django.conf.urls import url
@@ -130,7 +130,7 @@ urlpatterns = [
    url(r'^about$', AboutView.as_view(), name='about'),
 ]
 
-#instale a app core no projeto editando o arquivo projeto/settings.py adicionando na lista INSTALLED_APPS como no exemplo:
+### instale a app core no projeto editando o arquivo projeto/settings.py adicionando na lista INSTALLED_APPS como no exemplo:
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -142,7 +142,7 @@ INSTALLED_APPS = [
     'core',
 ]
 
-#habilite o gerenciador de URLs do projeto para trabalhar com as URLs da app core, para isto, edite o arquivo projeto/urls.py importando o urls do core:
+### habilite o gerenciador de URLs do projeto para trabalhar com as URLs da app core, para isto, edite o arquivo projeto/urls.py importando o urls do core:
 
 from django.conf.urls import url, include
 from django.contrib import admin
@@ -156,7 +156,7 @@ urlpatterns = [
     url(r'^accounts/', include('django.contrib.auth.urls')),
 ]
 
-#url para arquivos de media quando em desenvolvimento
+### url para arquivos de media quando em desenvolvimento
 if settings.DEBUG:
     urlpatterns += staticfiles_urlpatterns()
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
@@ -165,31 +165,31 @@ urlpatterns += static(settings.STATIC_URL,
     document_root = settings.STATIC_ROOT)    
 
 
-#sempre de criar um app, rodar makemigrations (gera os scripts para o banco de dados) e migrate (roda o script)
+### sempre que criar um app, rodar makemigrations (gera os scripts para o banco de dados) e migrate (roda o script)
 python manage.py makemigrations core
 
 python manage.py migrate core
 
-#neste ponto a sua home já pode ser exibida no navegador
+### neste ponto a sua home já pode ser exibida no navegador
 
-#rodando o servidor web de desenvolvimento (dentro do diretório projeto)
+### rodando o servidor web de desenvolvimento (dentro do diretório projeto)
 python manage.py runserver
 
-#acessando via navegador
+### acessando via navegador
 http://localhost:8000
 ```
 
 ## Criando modelo para persistir no Banco de Dados, Instalando a app no Django Admin (Painel), Buscando os registros do modelo numa view e mostrando no HTML
 ```shell
-#no diretório projeto, crie as apps: usuario, instituicao, ....
+### no diretório projeto, crie as apps: usuario, instituicao, ....
 
 python manage.py startapp usuario
 python manage.py startapp instituicao
 python manage.py startapp ....
 
-#edite o arquivo models.py dentro da app criada, adicionando a classe referente a app. Repita isso para cada models de aplicação criada
+### edite o arquivo models.py dentro da app criada, adicionando a classe referente a app. Repita isso para cada models de aplicação criada
 
-#edite o arquivo views.py dentro da app criada, adicionando os métodos referentes a app. Repita isso para cada classe de aplicação criada. Por exemplo:
+### edite o arquivo views.py dentro da app criada, adicionando os métodos referentes a app. Repita isso para cada classe de aplicação criada. Por exemplo:
 
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -213,7 +213,7 @@ class InjuriaDeleteView(LoginRequiredMixin, DeleteView):
 	fields = ['campo1', 'campo2', 'campo3' ,'....']
 
 
-#instale a app criada no projeto editando o arquivo projeto/settings.py adicionando na lista INSTALLED_APPS:
+### instale a app criada no projeto editando o arquivo projeto/settings.py adicionando na lista INSTALLED_APPS:
 
 INSTALLED_APPS = [
 	'django.contrib.admin',
@@ -228,7 +228,7 @@ INSTALLED_APPS = [
 	'...'
 ]
 
-#habilite o gerenciador de URLs do projeto para trabalhar com as URLs da app criada. Para isto, edite o arquivo projeto/urls.py importando o urls da app criada:
+### habilite o gerenciador de URLs do projeto para trabalhar com as URLs da app criada. Para isto, edite o arquivo projeto/urls.py importando o urls da app criada:
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -239,12 +239,11 @@ urlpatterns = [
     url(r'^accounts/', include('django.contrib.auth.urls'))
 ]
 
-#crie o arquivo urls.py dentro da pasta da app criada. Por exemplo:
+### crie o arquivo urls.py dentro da pasta da app criada. Por exemplo:
 
 from django.conf.urls import url
 from .views import ClasseCriadaListView, ClasseCriadaCreateView
 from .views import ClasseCriadaUpdateView, ClasseCriadaDeleteView
-
 
 urlpatterns = [
 	url(r'list/$', ClasseCriadaListView.as_view(), name='app_criada_list'),
@@ -253,35 +252,34 @@ urlpatterns = [
 	url(r'(?P<pk>\d+)/delete/$', ClasseCriadaDeleteView.as_view(), name='app_criada_delete'),
 ]
 
-#criar script para migração do Banco de Dados dos modelos das apps (script que cria as tabelas necessárias para atender o modelo especificado)
+### criar script para migração do Banco de Dados dos modelos das apps (script que cria as tabelas necessárias para atender o modelo especificado)
 
 python manage.py makemigrations core
 python manage.py makemigrations usuario
 python manage.py makemigrations ...
 
-#comando no shell para rodar as migrações da app core no Banco de Dados
+### comando no terminal para rodar as migrações da app core no Banco de Dados
 python manage.py migrate core
 python manage.py migrate usuario
 python manage.py migrate ....
 
-#Criando o banco de dados e o 1o usuario do banco: com a venv levantada, na pasta projeto, rodar:
+### Criando o banco de dados e o 1o usuario do banco: com a venv levantada, na pasta projeto, rodar:
 python manage.py shell
 
-##PARA VISUALIZAR, SE NECESSÁRIO, OS USUÁRIOS DO MYSQL
+### PARA VISUALIZAR, SE NECESSÁRIO, OS USUÁRIOS DO MYSQL
 SELECT user FROM mysql.user;
 
-##criando o banco
+### criando o banco
 CREATE DATABASE nomeDoSistema_db;
 
 CREATE USER ‘nomeDoSistema’@‘localhost' IDENTIFIED BY ‘senhaDesejada’;
 
 GRANT ALL PRIVILEGES ON nomeDoSistema_db.* TO ‘nomeDoSistema’@‘localhost' IDENTIFIED BY 'senhaDesejada';
 
-##criando o primeiro usuário
-
+### criando o primeiro usuário
 from usuario.models import Usuario
 u = Usuario()
-u.nome = 'SADEPI'
+u.nome = 'Nome do Usuário'
 u.tipo = 'ADMINISTRADOR'
 u.email = 'projetos@ufn.edu.br'
 u.is_active = True
