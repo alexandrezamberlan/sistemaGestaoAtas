@@ -5,20 +5,15 @@
 {% endblock %}
 
 {% block title %}
-	{% bootstrap_icon 'user' %} Cadastro de usuário
+	{% bootstrap_icon 'user' %} Auto cadastro de usuário no SOGA
 {% endblock %}
 
 {% block content %}
 <form class="form" role="form" method="POST">
   {% csrf_token %}
   {{ form.non_field_errors }}
-  {% bootstrap_field form.nome %}
-  {% bootstrap_field form.email %}
-  {% bootstrap_field form.password %}
-  {% bootstrap_field form.tipo %}
-  {% bootstrap_field form.matricula %}
-  {% bootstrap_field form.cpf %}
-  {% bootstrap_field form.rg %}
+  
+  {% bootstrap_form form%}
   
   {% buttons submit='Gravar' %}
     <a href="{% url 'home_redirect' %}"class="btn btn-info" role="button">Voltar</a>

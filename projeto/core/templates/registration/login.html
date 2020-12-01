@@ -26,6 +26,12 @@
                     {% bootstrap_icon 'glyphicon glyphicon-off' %} Entrar
                   </button>
                 </p>
+                <p style="text-align:center;">
+                  <a class="btn btn-primary" style="width:100%;" href="{% url 'usuario_register' %}">{% bootstrap_icon 'glyphicon glyphicon-plus-sign' %} Criar conta</a>
+                </p>
+                <p style="text-align:center;">
+                  <a class="btn btn-primary" style="width:100%;" href="{% url 'password_reset' %}">{% bootstrap_icon 'glyphicon glyphicon-flag' %} Resetar senha</a>
+                </p>
                 </form>
               </div>
               <div class="alert alert-info text-center">

@@ -12,7 +12,7 @@ from mail_templated import EmailMessage
 from utils.decorators import LoginRequiredMixin, StaffRequiredMixin, SecretariaRequiredMixin
 
 from .models import Usuario
-# from .forms import UsuarioRegisterForm
+from .forms import UsuarioRegisterForm
 
 
 class UsuarioListView(LoginRequiredMixin, ListView):
@@ -57,26 +57,28 @@ class UsuarioDeleteView(LoginRequiredMixin, StaffRequiredMixin, DeleteView):
         return redirect(self.success_url)
 
 
-# class UsuarioRegisterView(CreateView):
-#     model = Usuario
-#     form_class = UsuarioRegisterForm
-#     template_name = 'usuario/usuario_register_form.html'
-
-#     def form_valid(self, form):
-#         self.object = form.save(commit=False)
-#         self.object.save()
-#         return super(UsuarioRegisterView, self).form_valid(form)
+class UsuarioRegisterView(CreateView):
+    model = Usuario
+    form_class = UsuarioRegisterForm
+    template_name = 'usuario/usuario_register_form.html'
     
-#     def get_success_url(self):
-#         message = EmailMessage('usuario/email/validacao_email.html', {'usuario': self.object},
-#                                settings.EMAIL_HOST_USER, to=[self.object.email])
-#         message.send()     
-#         return reverse('usuario_register_success')
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.is_active = False
+        self.object.save()
+        return super(UsuarioRegisterView, self).form_valid(form)
+    
+    def get_success_url(self):
+        
+        message = EmailMessage('usuario/email/validacao_email.html', {'usuario': self.object},
+                               settings.EMAIL_HOST_USER, to=[self.object.email])
+        message.send()
+                
+        return reverse('usuario_register_success')
 
 
 class UsuarioRegisterSuccessView(TemplateView):
     template_name= 'usuario/usuario_register_success.html'
-
 
 class UsuarioRegisterActivateView(RedirectView):
     models = Usuario
@@ -86,5 +88,5 @@ class UsuarioRegisterActivateView(RedirectView):
         self.object.is_active = True
         self.object.save()
         login(self.request, self.object)
-        messages.success(self.request, 'Obrigado por acessar o TFG ONLINE. Esta é a sua área restrita de acompanhamento de TFG.')
-        return reverse('appprofessor_home')
+        messages.success(self.request, 'Obrigado por acessar o SOGA. Esta é a sua área restrita.')
+        return reverse('home')

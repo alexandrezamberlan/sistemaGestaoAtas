@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'core',
     'curso',
     'usuario',
+    
+    'mail_templated',
 ]
 
 MIDDLEWARE = [
