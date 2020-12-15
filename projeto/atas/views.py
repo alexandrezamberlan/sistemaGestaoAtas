@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.contrib import messages
 from django.shortcuts import render
 from django.shortcuts import redirect
+from django.db.models import Q
 
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -18,8 +19,13 @@ from .models import Ata
 
 class AtaListView(LoginRequiredMixin, ListView):
     model = Ata
-    
-    
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        if self.request.user.is_staff:
+            return qs
+        return qs.filter(curso__in=self.request.user.curso.all())
+
 class AtaCreateView(LoginRequiredMixin,  SecretariaRequiredMixin, CreateView):
     model = Ata
     fields = ['curso', 'codigo', 'data', 'hora', 'local', 'pauta', 'redator', 'texto', 'validada', 'integrantes', 'arquivo_anexo1']

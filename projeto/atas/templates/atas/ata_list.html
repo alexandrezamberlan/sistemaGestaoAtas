@@ -27,7 +27,6 @@
 
   		<tbody>
 			{% for ata in object_list %}
-				{% if user.tipo == 'ADMINISTRADOR' or ata.curso in user.curso.all %}  
 					<tr>
 						<td>{{ ata.curso }} </td>
 						<td>{{ ata.codigo }} </td>
@@ -64,7 +63,6 @@
 							</span>
 						</td>
 					</tr>
-				{% endif %}
 			{% endfor %}
   		</tbody>
 	</table>

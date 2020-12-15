@@ -40,15 +40,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'bootstrap3',
     'easy_pdf',
-    
+    'mail_templated',
+
     'atas',
     'core',
     'curso',
     'usuario',
-    
-    'mail_templated',
 ]
 
 MIDDLEWARE = [
