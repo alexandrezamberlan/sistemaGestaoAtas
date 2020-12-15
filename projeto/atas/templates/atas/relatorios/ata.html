@@ -1,0 +1,76 @@
+{% extends 'core/relatorios/base.html' %}
+
+{% block content %}
+<h1>Curso: {{ object.curso }}</h1>
+<hr>
+<table>
+    <tbody>
+        <tr>
+            <td>Data e hora:</td>
+            <td>Número {{ object.codigo }} em {{ object.data|date:'d/m/Y' }} às {{ object.hora }}</td>
+        </tr>
+        <tr>
+            <td>Local:</td>
+            <td>{{ object.local }}</td>
+        </tr>
+        <tr>
+            <td>Pauta:</td>
+            <td>{{ object.pauta }}</td>
+        </tr>
+        <tr>
+            <td>Redator:</td>
+            <td>{{ object.redator }}</td>
+        </tr>
+        <tr>
+            <td>Integrantes:</td>
+            <td>
+                {% for c in object.integrantes.all %}
+                    {{ c.nome }}
+                    {% if forloop.last %}
+                        .
+                    {% else %}
+                        ,
+                    {% endif %}
+                {% empty %}
+                    <i>Nenhum participante</i>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>Validada? </td>
+            <td>
+                {% if object.validada %}
+                    Sim
+                {% else %}
+                    Não
+                {% endif%}
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+
+<table>
+    <thead>
+        <tr>
+            <td><h3>Texto e anexo</h3></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-justify: newspaper;">
+                {{ object.texto|linebreaks }}
+            </td>
+        </tr>
+        {% if ata.arquivo_anexo1 %}
+            <tr>
+                <td>
+                    {{ ata.arquivo_anexo1.url }}
+                </td>
+            </tr>
+        {% endif %}
+    </tbody>
+</table>
+
+{% endblock %}

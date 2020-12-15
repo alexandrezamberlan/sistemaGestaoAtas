@@ -54,6 +54,10 @@ class Ata(models.Model):
     @property
     def get_visualiza_url(self):
         return reverse('ata_detail', args=[str(self.id)])
+
+    @property
+    def get_relatorio_url(self):
+        return reverse('ata_report', args=[str(self.id)])
     
 
 #triggers para limpeza dos arquivos apagados ou alterados. No Django é chamado de signals

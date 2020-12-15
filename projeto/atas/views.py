@@ -9,6 +9,8 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from django.urls import reverse
 
+from easy_pdf.views import PDFTemplateResponseMixin
+
 from utils.decorators import LoginRequiredMixin,  StaffRequiredMixin, SecretariaRequiredMixin
 
 from .models import Ata
@@ -81,3 +83,8 @@ class AtaDeleteView(LoginRequiredMixin, StaffRequiredMixin, DeleteView):
 class AtaDetailView(LoginRequiredMixin, DetailView):
     model = Ata
     template_name = 'atas/ata_detail.html'
+
+
+class AtaRelatorioView(LoginRequiredMixin, PDFTemplateResponseMixin, DetailView):
+    model = Ata
+    template_name = 'atas/relatorios/ata.html'

@@ -1,0 +1,34 @@
+{% extends "easy_pdf/base.html" %}
+
+{% block extra_style %}
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <style type="text/css">
+        body {
+            font-family: "Helvetica", "sans-serif";
+            color: #333333;
+        }
+    </style>
+{% endblock %}
+
+{%block page_header%}
+    <table style="color: #777777;">
+        <tr style="text-align: center;">
+            <td>
+                <h1>UFN Sistema de gestão de ATAS</h1>
+                <h3>Relatório</h3>
+            </td>
+        </tr>
+    </table>
+    <hr style="color: #777777;">
+{%endblock%}
+
+{% block content %}
+
+{% endblock %}
+
+{% block page_foot %}
+    <div style="display: block;margin: 0 auto;text-align: center;">
+        Página: <pdf:pagenumber /><br>
+        Impresso em: {% now "SHORT_DATETIME_FORMAT" %}
+    </div>
+{% endblock %}
