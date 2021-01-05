@@ -10,6 +10,8 @@ Clonar o projeto na pasta desejada, em geral, uma boa prática é em /var/www/ur
 
 Criar e levantar a venv, e instalar os requirements.txt
 
+Criar ou copiar .env para o servidor
+
 ============
 GUNICORN 
 
@@ -27,23 +29,31 @@ ExecStart=pastaServidor/nomeProjeto/venv/bin/gunicorn --access-logfile - --worke
 
 ============
 
-Iniciar o parser gunicorn:
+Passo 1 - Iniciar o parser gunicorn:
 sudo systemctl start nomeProjeto
 
-Adicionar o sistema como serviço reconhecido no sistema:
+Passo 2 - Adicionar o nosso sistema como serviço reconhecido no sistema operacional:
 sudo systemctl enable nomeProjeto
 
-============
-Nginx
+Caso acontece problemas na geração do .sock do serviço e o .service precise ser atualizado, há necessidade de rodar:
+sudo systemctl daemon-reload
 
-Esse é o roteiro para criar outros serviços virtuais, ai e só substituir exemplo.com pelo  domínio que tu vai utilizar sem www (por exemplo, comic.labinf.ufn.edu.br)
+E depois executa novamente passo 1 e 2
+
+
+============
+NGINX
+
+Esse é o roteiro para criar outros serviços virtuais, ai e só substituir exemplo.com pelo  
+domínio que você vai utilizar sem www (por exemplo, comic.labinf.ufn.edu.br)
  
 Crie o diretório para examplo.com como a seguir, usando o flag -p para criar qualquer diretório pai necessário:
  
 sudo mkdir -p pastaServidor/examplo.com/
   
 Para que o Nginx sirva esse conteúdo, é necessário criar um bloco de servidor com as diretivas corretas. 
-Em vez de modificar o arquivo de configuração padrão diretamente, vamos criar um novo em /etc/nginx/sites-available/examplo.com:
+Em vez de modificar o arquivo de configuração padrão diretamente, 
+vamos criar um novo em /etc/nginx/sites-available/examplo.com:
  
 sudo vim /etc/nginx/sites-available/exemplo.com
 Cole dentro o seguinte bloco de configuração, que é similar ao padrão, mas atualizado para nosso novo diretório e nome de domínio:
@@ -94,6 +104,11 @@ Se não houver problemas, reinicie o Nginx para ativar suas alterações:
  
 sudo systemctl restart nginx
 
+
+=============================
+No settings.py do caminho urlProjeto/nomeProjeto/projeto/projeto, adicionar à variável de ambiente (EXEMPLO)
+
+ALLOWED_HOSTS = ['localhost','www.soga.lapinf.ufn.edu.br', 'soga.lapinf.ufn.edu.br']
 =============================
  
 Obtendo um Certificado SSL
@@ -149,8 +164,11 @@ GRANT ALL PRIVILEGES ON nomeDoSistema_db.* TO ‘nomeDoSistema’@‘localhost' 
 Criando o primeiro usuário
 
 na pasta projeto do sistema, com a venv ativa,
+OBSERVAÇÃO: jamais rodar o makemigration no servidor
+
 rodar migrate
 
+#via shell django -> python manage.py shell
 
 from usuario.models import Usuario
 u = Usuario()
@@ -164,7 +182,7 @@ u.set_password('projetos@ufn.edu.br')
 u.save()
 
 =======
-.env
-DATABASE_URL=mysql://sadepi:sadepi2018$@127.0.0.1:3306/sadepi_db
+Adicionar no .env a variável de ambiente para setar o MySQL como o banco no servidor
+DATABASE_URL=mysql://soga:soga2020@127.0.0.1:3306/soga_db
 
 
