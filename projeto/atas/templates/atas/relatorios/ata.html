@@ -7,7 +7,7 @@
     <tbody>
         <tr>
             <td>Data e hora:</td>
-            <td>Número {{ object.codigo }} em {{ object.data|date:'d/m/Y' }} às {{ object.hora }}</td>
+            <td>{{ object.data|date:'d/m/Y' }} às {{ object.hora }}</td>
         </tr>
         <tr>
             <td>Local:</td>
@@ -66,7 +66,7 @@
         {% if ata.arquivo_anexo1 %}
             <tr>
                 <td>
-                    {{ ata.arquivo_anexo1.url }}
+                    Há arquivo com conteúdo anexado.
                 </td>
             </tr>
         {% endif %}

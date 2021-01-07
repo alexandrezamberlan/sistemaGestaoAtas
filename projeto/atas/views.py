@@ -25,6 +25,7 @@ class AtaListView(LoginRequiredMixin, ListView):
         if self.request.user.is_staff:
             return qs
         return qs.filter(curso__in=self.request.user.curso.all())
+        
 
 class AtaCreateView(LoginRequiredMixin,  SecretariaRequiredMixin, CreateView):
     model = Ata

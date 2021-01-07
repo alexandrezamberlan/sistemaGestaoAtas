@@ -1,0 +1,41 @@
+Para a geração de relatórios PDFs é necessária a instalação na venv:
+    - django-easy-pdf
+    - django-utils-six
+
+No arquivo settings.py, adicionar easy-pdf na variável de ambiente INSTALLED_APPS
+
+Em projeto/core/templates/core criar uma pasta relatorios e dentro dela o arquivo base.html
+
+No app desejado, neste exemplo os relatórios estão em atas, alterar:
+    - models.py
+        @property
+        def get_relatorio_url(self):
+            return reverse('ata_report', args=[str(self.id)])
+
+    - urls.py
+        url(r'(?P<pk>\d+)/relatorio/$', AtaRelatorioView.as_view(), name='ata_report'),
+
+    - views.py
+        Importar 
+            from easy_pdf.views import PDFTemplateResponseMixin
+
+        Criar a classe AtaRelatorioView
+        
+        class AtaRelatorioView(LoginRequiredMixin, PDFTemplateResponseMixin, DetailView):
+            model = Ata
+            template_name = 'atas/relatorios/ata.html'
+
+    - em templates/relatorios/ata.html
+        É neste arquivo que o núclo/bloco de conteúdo será gerado pdf
+
+    {% extends 'core/relatorios/base.html' %}
+
+    {% block content %}
+        {% comment %} TODO O CONTEÚDO BUSCADO DO BANCO DE DADOS COM TEXTOS CUSTOMIZÁVEIS {% endcomment %}
+    {% endblock %}
+
+
+No botão ou link desejado, chamar a função do models.py construída. Neste exemplo, o link está no arquivo _barra_botoes.html
+dentro da pasta templates/includes
+
+    <a href="{{ object.get_relatorio_url }}" target="_blank" class="btn btn-md btn-primary">{% bootstrap_icon 'print' %} Imprimir</a>

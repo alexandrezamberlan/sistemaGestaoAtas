@@ -3,6 +3,6 @@
 <div class="panel panel-default">
     <div class="panel-body">
         <a href="{% url 'ata_list' %}" class="btn btn-md btn-primary">{% bootstrap_icon 'circle-arrow-up' %} Voltar </a>
-        <a href="{{ object.get_relatorio_url }}" class="btn btn-md btn-primary">{% bootstrap_icon 'print' %} Imprimir</a>
+        <a href="{{ object.get_relatorio_url }}" target="_blank" class="btn btn-md btn-primary">{% bootstrap_icon 'print' %} Imprimir</a>
     </div>
 </div>
